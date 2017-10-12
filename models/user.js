@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    salt: DataTypes.STRING
+    salt: DataTypes.STRING,
   }, {
     classMethods: {
       associate: function(models) {
@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     User.belongsToMany(models.Issue, {through:models.Respond});
     User.hasMany(models.Respond);
     User.hasMany(models.VoteIssue);
+    User.hasOne(models.Goverment);
   };
 
   User.prototype.upVote = function(issue_id, VoteIssue){

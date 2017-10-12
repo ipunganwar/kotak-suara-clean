@@ -40,7 +40,7 @@ router.get('/respond/:id', (req, res)=>{
 			res.render('issue/respond', data)
 		})
 
-	})	
+	})
 
 })
 
@@ -56,17 +56,25 @@ router.post('/respond/:id', (req, res)=>{
 	})
 })
 
-router.get('/respond/:id/voteup', (req, res)=>{
+router.get('/:id/:vote', (req, res)=>{
 	Models.User.findById(req.session.userId).then((user)=>{
-		return user.upVote(req.params.id, Models.VoteIssue)
+		return user.voteIssue(req.params.id, req.params.vote, Models.VoteIssue, Models.Issue)
 	}).then((voteIssue)=>{
-		res.send(voteIssue)
+		res.redirect(`/issue/respond/${req.params.id}`)
 	}).catch((err)=>{
 		res.send(err)
 	})
-	
 })
 
+router.get('/respond/:issue_id/:res_id/:vote', (req, res)=>{
+	Models.User.findById(req.session.userId).then((user)=>{
+		return user.voteRespond(req.params.res_id, req.params.vote, Models.VoteRespond, Models.Respond)
+	}).then(()=>{
+		res.redirect(`/issue/respond/${req.params.issue_id}`)
+	}).catch((err)=>{
+		res.send(err)
+	})
+})
 
 router.get('/respond/:id/command', (req, res)=>{
 	console.log(req.session)

@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
     GovermentId: DataTypes.STRING,
     title: DataTypes.STRING,
     detail: DataTypes.STRING,
-    isActive: DataTypes.BOOLEAN
+    isActive: DataTypes.BOOLEAN,
+    vote: {
+      type:DataTypes.INTEGER,
+      defaultValue:0
+    }
   }, {
     classMethods: {
       associate: function(models) {
@@ -23,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Issue.prototype.voteCount = function(){
     return new Promise((resolve, reject)=>{
-      
+
     })
   }
 

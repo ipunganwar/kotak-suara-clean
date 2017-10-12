@@ -1,4 +1,5 @@
 'use strict';
+const voter = require('../helpers/voter');
 module.exports = (sequelize, DataTypes) => {
   var User = sequelize.define('User', {
     username: DataTypes.STRING,
@@ -18,28 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.VoteIssue);
   };
 
-  User.prototype.upVote = function(issue_id, VoteIssue){
-    console.log('------------======================---------------1212121')
-    return new Promise((resolve, reject)=>{
-      VoteIssue.findOrCreate({where:{UserId:this.id, IssueId:issue_id}}).then((voteIssue)=>{
-        if(voteIssue.length==1){
-          voteIssue=voteIssue[0]
-        }else{
-          voteIssue.isVoteUp = true;
-          voteIssue.save();
-          console.log(voteIssue)
-          resolve(voteIssue);
-        }
-     
-      })
-    })
+  User.prototype.voteIssue = function(issue_id, vote, VoteIssue, Issue){
+    return voter(this.id, issue_id, vote, VoteIssue, Issue);
+  };
+
+  User.prototype.voteRespond = function(respond_id, vote, VoteRespond, Respond){
+    return voter(this.id, respond_id, vote, VoteRespond, Respond)
   }
-
-  User.prototype.downVote = function(){
-    
-  }
-
-
 
   return User;
 };

@@ -17,16 +17,22 @@ router.get('/',checkPermission ,(req, res)=>{
 
 router.post('/', function(req, res, next) {
  console.log(req.body);
-  Models.User.find({where:{username:req.body.username}}).then((user)=>{
+  Models.User.find({where:{username:req.body.username},include:Models.Goverment}).then((user)=>{
     console.log(user);
+     // res.send(user)
 
     if(user!=null){
-      //res.send(user)
+     
       if(user.password == encryptMD5(req.body.password, user.salt)){
-      	// res.send(user)
+      	 // res.send(user)
         req.session.userId = user.id;
         req.session.isLogin = true; 
-        // res.send(req.session)
+          console.log(user.Goverment)
+          if(user.Goverment != null){
+             req.session.isGoverment = true
+          }
+          
+          
         	res.redirect('/')
       }else{
         res.render('login/login.ejs')

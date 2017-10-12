@@ -1,11 +1,9 @@
 
 <%-include ../partials/header%>
-<h3>Hot Issue</h3>
-<%-include ../partials/menu%>
-
-
+<%- include('../partials/menu2',{})%>
+<br><br><br>
 <% dataIssue.forEach(issue=>{%>
-
+	
 	<ul class="list-group-item">
 	  <li class="list-group-item"><%=issue.title%> <a class="btn btn-outline-secondary" href="/issue/respond/<%=issue.id%>" role="button">Respond Here</a></li>
 	</ul>

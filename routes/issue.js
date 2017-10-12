@@ -37,7 +37,7 @@ router.get('/respond/:id', (req, res)=>{
 		Models.Issue.findById(req.params.id).then((result_issue)=>{
 			data.result_issue = result_issue
 			// res.send(data);
-			res.render('issue/respond', data)
+			res.render('issue/respond', {data, session:req.session})
 		})
 
 	})	

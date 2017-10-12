@@ -27,6 +27,7 @@ router.post('/', function(req, res, next) {
       	 // res.send(user)
         req.session.userId = user.id;
         req.session.isLogin = true; 
+        req.session.name = user.username;
           console.log(user.Goverment)
           if(user.Goverment != null){
              req.session.isGoverment = true

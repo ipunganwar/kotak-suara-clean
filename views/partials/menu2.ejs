@@ -23,15 +23,21 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Issues <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="/issue">List Issues</a></li>
-               
+                <%if(session.isGoverment != null){%>
                   <li><a href="/issue">Add Issues</a></li>
-                
+                <%}%>
               </ul>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+          <%if(session.name == null){%>
             <li><a href="/login/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+            <li><a href="/login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+            <%}else{%>
+              <li><a href="#"><span class="glyphicon glyphicon-user"></span>Hallo, <%=session.name%></a></li>
+            <%}%>
       <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+
           </ul>
         </div>
       </div>

@@ -12,7 +12,7 @@ let checkPermission = function(req, res, next){
 router.get('/',  (req, res)=>{
 	// console.log(req.session)
 	Models.Issue.findAll().then((result)=>{
-		res.render('issue/list', {dataIssue:result})
+		res.render('issue/list', {dataIssue:result, session:req.session})
 	})
 })
 

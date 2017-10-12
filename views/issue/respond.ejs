@@ -1,0 +1,69 @@
+<%-include ../partials/header%>
+<%-include ../partials/menu%>
+
+	<ul class="list-group-item">
+	 	<li class="list-group-item">
+		  	<small><%=result_issue.createdAt.toString().substring(0,15)%></small>
+		  	<h4><%=result_issue.title%></h4>
+			<br>
+			<%=result_issue.detail%>
+			<br>
+			  
+			<a <%-include ../issue/modalCommand%>
+			<div class="form-group">
+
+				<form method="post" action="/issue/respond/<%=result_issue.id%>">
+					<label class="form-control-label" for="formGroupExampleInput">Your Command</label>
+					<input type="hidden" value="result_issue.id" name="IssueId">
+				    <input type="hidden" value="result_issue.id" name="userId">
+				    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="respond">
+				  </div>
+				  <button type="submit" class="btn btn-primary pull-right">Submit</button>
+				</form>
+			</div></a>
+			<br>
+			<div>
+					
+				<a class="btn btn-default btn-sm" href="/issue/respond/<%=result_issue.id%>/voteup" role="button" ><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
+				<a class="btn btn-default btn-sm" href="#" role="button"><span class="glyphicon glyphicon-thumbs-down"></span> Unlike</a>
+			</div>
+		</li>
+	</ul>
+	<ul>		
+		<%result_respond.forEach(respond=>{%>
+			
+			<div class="commentText">
+			    <div class="row">
+			        <div class="col-sm-8">
+			            <div class="panel panel-white post panel-shadow">
+			                <div class="post-heading">
+			                    <div class="pull-left image">
+			                        <img src="http://bootdey.com/img/Content/user_1.jpg" class="img-circle avatar" alt="user profile image">
+			                    </div>
+			                    <div class="pull-left meta">
+			                        <div class="title h5">
+			                            <b><%=user%></b>
+			                            made a post.
+			                        </div>
+			                        <h6 class="text-muted time">1 minute ago</h6>
+			                    </div>
+			                </div> 
+			                <div class="post-description"> 
+			                    <p><%=respond.respond%></p>
+			                    <div class="stats">
+			                        <a href="#" class="btn btn-default stat-item">
+			                            <i class="fa fa-thumbs-up icon"></i>2
+			                        </a>
+			                        <a href="#" class="btn btn-default stat-item">
+			                            <i class="fa fa-thumbs-down icon"></i>12
+			                        </a>
+			                    </div>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			
+		<%})%>
+	</ul>
+<%-include ../partials/footer%>

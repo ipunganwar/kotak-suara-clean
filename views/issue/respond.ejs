@@ -11,7 +11,7 @@
 			<%=data.result_issue.detail%>
 			<br>
 			<br>
-			  
+			  <%if(session.userId != null){%>
 			<a <%-include ../issue/modalCommand%>
 			<div class="form-group">
 
@@ -21,9 +21,16 @@
 				    <input type="hidden" value="data.result_issue.id" name="userId">
 				    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input" name="respond">
 				  </div>
+				  
 				  <button type="submit" class="btn btn-primary pull-right">Submit</button>
+				  
 				</form>
 			</div></a>
+			<%}else{%>
+				<div class="pull-right">
+					<a href="/login">LOGIN DULU COY</a>
+				</div>
+			<%}%>
 			<br>
 			<div>		
 				<a class="btn btn-default btn-sm" href="/issue/respond/<%=data.result_issue.id%>/voteup" role="button" ><span class="glyphicon glyphicon-thumbs-up"></span> Like</a>
@@ -33,6 +40,7 @@
 	</ul>
 	<br>
 	<ul>		
+
 		<%data.result_respond.forEach(respond=>{%>
 			
 			
